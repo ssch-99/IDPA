@@ -1,8 +1,6 @@
 package vrphysics.experiment;
 
-import vrphysics.controls.SimulationControls;
-
-public class SampleExperiment implements ExperimentMetaData, SimulationControls {
+public class SampleExperiment extends BaseExperiment {
     @Override
     public String getTitle() {
         return "SampleExperiment A";
