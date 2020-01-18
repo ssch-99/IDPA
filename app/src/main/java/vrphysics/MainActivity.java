@@ -4,13 +4,13 @@ import android.os.Bundle;
 
 import processing.vr.VRActivity;
 import processing.core.PApplet;
-import vrphysics.sketches.VRSketch;
+import vrphysics.sketches.menu.Menu;
 
 public class MainActivity extends VRActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PApplet sketch = new VRSketch();
-        setSketch(sketch);
+        PApplet menu = new Menu();
+        setSketch(menu);
     }
 }

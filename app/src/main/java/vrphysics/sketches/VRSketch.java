@@ -18,7 +18,7 @@ import java.io.IOException;
 
 public class VRSketch extends PApplet {
     public void setup() {
-
+        fullScreen(VR);
     }
     public void settings() {
         fullScreen(VR);

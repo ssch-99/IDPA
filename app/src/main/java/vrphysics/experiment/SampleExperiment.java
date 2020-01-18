@@ -13,7 +13,7 @@ public class SampleExperiment extends BaseExperiment {
 
     @Override
     public String getImageFileName() {
-        return "";
+        return "sample.jpg";
     }
 
     @Override
