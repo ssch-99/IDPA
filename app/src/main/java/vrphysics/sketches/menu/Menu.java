@@ -19,6 +19,7 @@ public class Menu extends PApplet {
     int menuHeight;
 
     public void setup() {
+        experiments = new ExperimentList();
         experiments.loadExperiments();
         menuPositionX = 0;
         menuPositionY = 0;
