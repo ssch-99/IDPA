@@ -2,14 +2,12 @@ package vrphysics.experiment;
 
 import java.util.ArrayList;
 
-public class ExperimentList {
-    ArrayList<BaseExperiment> experiment_list;
+public class ExperimentList extends ArrayList<BaseExperiment> {
+    public ExperimentList() {
+        super();
+    }
 
-    public ArrayList<BaseExperiment> getList() {
-        experiment_list = new ArrayList<>();
-        BaseExperiment experiment1 = new SampleExperiment();
-        experiment_list.add(experiment1);
+    public void loadExperiments() {
 
-        return experiment_list;
     }
 }

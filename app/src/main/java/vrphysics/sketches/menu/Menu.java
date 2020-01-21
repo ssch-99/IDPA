@@ -11,7 +11,7 @@ import vrphysics.experiment.ExperimentList;
 import vrphysics.experiment.ExperimentMetaData;
 
 public class Menu extends PApplet {
-    public ArrayList<BaseExperiment> experiments;
+    public ExperimentList experiments;
     PShape menu;
     int menuPositionX;
     int menuPositionY;
@@ -19,8 +19,7 @@ public class Menu extends PApplet {
     int menuHeight;
 
     public void setup() {
-        fullScreen(VR);
-        loadExperiments();
+        experiments.loadExperiments();
         menuPositionX = 0;
         menuPositionY = 0;
         menuHeight = 300;
@@ -79,11 +78,6 @@ public class Menu extends PApplet {
         }*/
 
         return menu;
-    }
-
-    private void loadExperiments(){
-        ExperimentList list = new ExperimentList();
-        experiments = list.getList();
     }
 
     private PImage loadExperimentImage(String imageName){
