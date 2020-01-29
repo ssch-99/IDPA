@@ -17,17 +17,23 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
     public void exit() {
+
+    }
+
+    public void settings() {
+
+    }
+
+    public void setup() {
+
+    }
+
+    public void calculate() {
+
+    }
+
+    public void draw() {
 
     }
 }
