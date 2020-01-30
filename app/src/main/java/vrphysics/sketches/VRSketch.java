@@ -6,6 +6,7 @@ import processing.event.*;
 import processing.opengl.*; 
 
 import processing.vr.*;
+import vrphysics.Sketch;
 import vrphysics.experiment.BaseExperiment;
 
 import java.util.HashMap;
@@ -18,71 +19,57 @@ import java.io.OutputStream;
 import java.io.IOException;
 
 public class VRSketch extends PApplet {
+    private HashMap<String, Sketch> sketchList;
     private SketchMode sketchMode;
-    private BaseExperiment experiment;
-    private Menu menu;
+    private Sketch currentSketch;
+
+    private void onModeChanged() {
+
+    }
+
+    private void resetEnvironment() {
+
+    }
+
+    private void changeMode(SketchMode mode) {
+        this.sketchMode = mode;
+        this.onModeChanged();
+    }
 
     public void setup() {
-        this.menu = new Menu(this);
+        this.sketchList = new HashMap<String, Sketch>();
+        this.sketchList.put("Menu", new Menu(this));
         this.sketchMode = SketchMode.MENU;
+        this.switchToSketch("Menu");
         cameraUp();
     }
+
     public void settings() {
         fullScreen(MONO);
     }
 
     public void calculate() {
-        switch (this.sketchMode) {
-            case MENU:
-                this.menu.calculate();
-            case SIMULATION:
-                this.experiment.calculate();
-            default:
-                break;
-        }
+        this.currentSketch.calculate();
     }
 
     public void draw() {
-        switch (this.sketchMode) {
-            case MENU:
-                this.menu.draw();
-            case SIMULATION:
-                this.experiment.draw();
-            default:
-                break;
-        }
+        this.currentSketch.draw();
     }
 
     public void touchStarted() {
-        switch (this.sketchMode) {
-            case MENU:
-                this.menu.draw();
-            case SIMULATION:
-                this.experiment.draw();
-            default:
-                break;
-        }
+
     }
 
     public void touchMoved() {
-        switch (this.sketchMode) {
-            case MENU:
-            case SIMULATION:
-            default:
-                break;
-        }
+
     }
 
     public void touchEnded() {
-        switch (this.sketchMode) {
-            case MENU:
-            case SIMULATION:
-            default:
-                break;
-        }
+
     }
 
-    public void changeMode(SketchMode mode) {
-        this.sketchMode = mode;
+    public void switchToSketch(String sketchName) {
+        this.currentSketch = this.sketchList.get(sketchName);
+        this.resetEnvironment();
     }
 }
