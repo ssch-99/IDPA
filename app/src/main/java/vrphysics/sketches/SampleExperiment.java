@@ -1,4 +1,7 @@
-package vrphysics.experiment;
+package vrphysics.sketches;
+
+import vrphysics.MainActivity;
+import vrphysics.experiment.BaseExperiment;
 
 public class SampleExperiment extends BaseExperiment {
     @Override
@@ -17,11 +20,12 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     public void settings() {
-
+        fullScreen(MONO);
     }
 
     public void setup() {
-
+        this.vrActivity = ((MainActivity)this.getActivity());
+        cameraUp();
     }
 
     public void calculate() {
@@ -29,6 +33,7 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     public void draw() {
-
+        background(140);
+        sphere(300);
     }
 }

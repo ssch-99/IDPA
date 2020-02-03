@@ -6,7 +6,7 @@ import vrphysics.controls.SimulationControls;
 import processing.core.PApplet;
 
 public abstract class BaseExperiment extends PApplet implements ExperimentMetaData, SimulationControls {
-    protected final MainActivity vrActivity = ((MainActivity)this.getActivity());
+    protected MainActivity vrActivity;
 
     public final void exit() {
         this.vrActivity.returnToMenu();
