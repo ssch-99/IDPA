@@ -7,27 +7,23 @@ import vrphysics.MainActivity;
 import vrphysics.experiment.BaseExperiment;
 
 public class GravityExperiment extends BaseExperiment {
-
-    PShape earthSpehre; //9.81
-    PVector locationEarth;
-    PShape moonSpehre; //1.62
-    PVector locationMoon;
-    PShape marsSpehre; //3.711
-    PVector locationMars;
+    PShape earthSphere; //9.81
+    PVector earthLocation;
+    PShape moonSphere; //1.62
+    PVector moonLocation;
+    PShape marsSphere; //3.711
+    PVector marsLocation;
     PImage sky;
-
     Boolean start = false;
-    int numberOfPresses = 0;
-
 
     @Override
     public String getTitle() {
-        return "SampleExperiment A";
+        return "Gravity Experiment";
     }
 
     @Override
     public String getDescription() {
-        return "Some nice description";
+        return "Simulates some planets with different gravitational accelerations";
     }
 
     @Override
@@ -41,57 +37,51 @@ public class GravityExperiment extends BaseExperiment {
     }
 
     public void setup() {
-
         cameraUp();
-
         noStroke();
         sphereDetail(40);
-        locationEarth = new PVector(0,0);
-        locationMoon = new PVector(-500,0);
-        locationMars = new PVector(500,0);
+        earthLocation = new PVector(0,0);
+        moonLocation = new PVector(-500,0);
+        marsLocation = new PVector(500,0);
 
+        earthSphere = createShape(SPHERE,100);
+        earthSphere.setTexture(loadImage("earth.jpg"));
 
-        earthSpehre = createShape(SPHERE,100);
-        earthSpehre.setTexture(loadImage("earth.jpg"));
+        moonSphere = createShape(SPHERE, 100);
+        moonSphere.setTexture(loadImage("moon.jpg"));
 
-        moonSpehre = createShape(SPHERE, 100);
-        moonSpehre.setTexture(loadImage("moon.jpg"));
-
-        marsSpehre = createShape(SPHERE, 100);
-        marsSpehre.setTexture(loadImage("mars.jpeg"));
+        marsSphere = createShape(SPHERE, 100);
+        marsSphere.setTexture(loadImage("mars.jpeg"));
 
         sky = loadImage("sky.jpeg");
-
-
     }
 
     public void draw() {
-
         if(start){
-
             //if(locationEarth.y > 0){
-            locationEarth.y -= 9.81f;
+            earthLocation.y -= 9.81f;
             //}
             //if(locationMoon.y > 0){
-            locationMoon.y -= 1.62f;
+            moonLocation.y -= 1.62f;
             // }
             //if(locationMars.x > 0){
-            locationMars.y -= 3.711f;
+            marsLocation.y -= 3.711f;
             //}
-
         }
+
         //background(sky);
         background(0);
         //translate(300,0, -300);
-        shape(earthSpehre, locationEarth.x,locationEarth.y);
+        shape(earthSphere, earthLocation.x, earthLocation.y);
+
         //translate(300,0, 0);
         //translate(0,0,500);
-        shape(moonSpehre, locationMoon.x,locationMoon.y);
+        shape(moonSphere, moonLocation.x, moonLocation.y);
 
         //translate(-600,0,0);
         //translate(0,0,500);
-        shape(marsSpehre, locationMars.x,locationMars.y);
-        translate(locationMars.x,locationMars.y,10000);
+        shape(marsSphere, marsLocation.x, marsLocation.y);
+        translate(marsLocation.x, marsLocation.y,10000);
 
 
     }
@@ -102,6 +92,4 @@ public class GravityExperiment extends BaseExperiment {
 
 
     public void settings() {  fullScreen(VR); }
-
-
 }
