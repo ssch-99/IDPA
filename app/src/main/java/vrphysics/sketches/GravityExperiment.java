@@ -3,7 +3,6 @@ package vrphysics.sketches;
 import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
-import vrphysics.MainActivity;
 import vrphysics.experiment.BaseExperiment;
 
 public class GravityExperiment extends BaseExperiment {
@@ -28,7 +27,7 @@ public class GravityExperiment extends BaseExperiment {
 
     @Override
     public String getImageFileName() {
-        return "";
+        return "thumbnail.png";
     }
 
 
@@ -45,15 +44,15 @@ public class GravityExperiment extends BaseExperiment {
         marsLocation = new PVector(500,0);
 
         earthSphere = createShape(SPHERE,100);
-        earthSphere.setTexture(loadImage("earth.jpg"));
+        earthSphere.setTexture(loadImage("./gravityExperiment/earth.jpg"));
 
         moonSphere = createShape(SPHERE, 100);
-        moonSphere.setTexture(loadImage("moon.jpg"));
+        moonSphere.setTexture(loadImage("./gravityExperiment/moon.jpg"));
 
         marsSphere = createShape(SPHERE, 100);
-        marsSphere.setTexture(loadImage("mars.jpeg"));
+        marsSphere.setTexture(loadImage("./gravityExperiment/mars.jpeg"));
 
-        sky = loadImage("sky.jpeg");
+        sky = loadImage("gravityExperiment/sky.jpeg");
     }
 
     public void draw() {
@@ -82,8 +81,6 @@ public class GravityExperiment extends BaseExperiment {
         //translate(0,0,500);
         shape(marsSphere, marsLocation.x, marsLocation.y);
         translate(marsLocation.x, marsLocation.y,10000);
-
-
     }
 
     public void mousePressed(){
