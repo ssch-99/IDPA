@@ -22,8 +22,9 @@ public class MainActivity extends VRActivity {
         super.onCreate(savedInstanceState);
         this.experiments = new HashMap<>();
         this.menu = new Menu();
+        this.currentSketch = this.menu;
 
-        setSketch(this.currentSketch);
+        this.setSketch(this.currentSketch);
     }
 
     public void loadExperiment(String experiment) {
