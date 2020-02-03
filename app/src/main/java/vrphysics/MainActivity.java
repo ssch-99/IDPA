@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import processing.vr.VRActivity;
 import processing.core.PApplet;
+import vrphysics.sketches.GravityExperiment;
 import vrphysics.sketches.SampleExperiment;
 import vrphysics.sketches.Menu;
 
@@ -16,10 +17,11 @@ public class MainActivity extends VRActivity {
 
     private void populateExperimentList() {
         this.experiments.put("SampleExperiment", new SampleExperiment());
+        this.experiments.put("GravityExperiment", new GravityExperiment());
     }
 
     private void testLoad() {
-        this.loadExperiment("SampleExperiment");
+        this.loadExperiment("GravityExperiment");
     }
 
     @Override
