@@ -1,14 +1,8 @@
 package vrphysics.sketches;
 
 import processing.core.PApplet;
-import vrphysics.Sketch;
 
-public class Menu implements Sketch {
-    private PApplet mainSketch;
-
-    public Menu(PApplet mainSketch) {
-        this.mainSketch = mainSketch;
-    }
+public class Menu extends PApplet {
 
     public void settings() {
 
@@ -23,6 +17,6 @@ public class Menu implements Sketch {
     }
 
     public void draw() {
-        this.mainSketch.background(123);
+
     }
 }
