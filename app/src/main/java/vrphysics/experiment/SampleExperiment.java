@@ -16,11 +16,6 @@ public class SampleExperiment extends BaseExperiment {
         return "";
     }
 
-    @Override
-    public void exit() {
-
-    }
-
     public void settings() {
 
     }
