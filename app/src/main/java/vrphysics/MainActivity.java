@@ -6,13 +6,9 @@ import java.util.HashMap;
 
 import processing.vr.VRActivity;
 import processing.core.PApplet;
-<<<<<<< HEAD
-import vrphysics.sketches.menu.Menu;
-=======
+import vrphysics.sketches.Menu;
 import vrphysics.sketches.GravityExperiment;
 import vrphysics.sketches.SampleExperiment;
-import vrphysics.sketches.Menu;
->>>>>>> master
 
 public class MainActivity extends VRActivity {
     private HashMap<String, PApplet> experiments;
@@ -31,17 +27,16 @@ public class MainActivity extends VRActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
         PApplet menu = new Menu();
         setSketch(menu);
-=======
+
         this.experiments = new HashMap<>();
         this.populateExperimentList();
         this.menu = new Menu();
         this.currentSketch = this.menu;
 
         this.setSketch(this.currentSketch);
-        this.testLoad();
+        //this.testLoad();
     }
 
     public void loadExperiment(String experiment) {
@@ -56,6 +51,5 @@ public class MainActivity extends VRActivity {
     public void returnToMenu() {
         this.currentSketch = this.menu;
         this.setSketch(this.currentSketch);
->>>>>>> master
     }
 }

@@ -15,8 +15,8 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     @Override
-    public String getImageFileName() {
-        return "";
+    public String getImageFilePath() {
+        return "sampleExperiment/thumbnail.png";
     }
 
     public void settings() {

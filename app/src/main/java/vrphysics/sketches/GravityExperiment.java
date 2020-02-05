@@ -26,8 +26,8 @@ public class GravityExperiment extends BaseExperiment {
     }
 
     @Override
-    public String getImageFileName() {
-        return "thumbnail.png";
+    public String getImageFilePath() {
+        return "gravityExperiment/thumbnail.png";
     }
 
 
