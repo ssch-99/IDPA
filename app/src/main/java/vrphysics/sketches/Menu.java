@@ -37,7 +37,7 @@ public class Menu extends PApplet {
         shape(menuItems.get(0));
         shape(menuItems.get(1));
 
-        // TO-DO: Fix iteration over menu items (static atm)
+        // TODO: Fix iteration over menu items (static atm)
         /*ListIterator iterator = menuItems.listIterator();
 
         while(iterator.hasNext()){
