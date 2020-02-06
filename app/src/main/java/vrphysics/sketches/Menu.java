@@ -1,8 +1,8 @@
 package vrphysics.sketches;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.ListIterator;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -12,9 +12,14 @@ import vrphysics.experiment.BaseExperiment;
 import vrphysics.experiment.ExperimentMetaData;
 
 public class Menu extends PApplet {
-    PImage bg;
-    private List<ExperimentMetaData> experiments;
+    private PImage bg;
+    private Collection<BaseExperiment> experiments;
     private List<PShape> menuItems;
+
+    public Menu(Collection<BaseExperiment> experiments) {
+        this.experiments = experiments;
+        this.menuItems = new ArrayList<PShape>();
+    }
 
     public void settings() {
         fullScreen(VR);
@@ -46,34 +51,22 @@ public class Menu extends PApplet {
     }
 
     private void createMenuItems(){
-        loadExperiments();
-        ListIterator iterator = experiments.listIterator();
-        menuItems = new ArrayList<>();
+        int offset = 0;
 
         // TODO: include z-axis and adjust shape locations
-        while(iterator.hasNext()){
-            BaseExperiment experiment = ((BaseExperiment) iterator.next());
-            PVector location = new PVector((displayWidth/2 - 100) * iterator.nextIndex(), displayHeight/2 - 100, 0);//iterator.nextIndex() * 100, 0);
-            PShape shape = createShape(RECT,location.x, location.y, 100, 100);
+        for (ExperimentMetaData e : this.experiments) {
+            PVector location = new PVector((displayWidth / 2 - 100) * offset, (displayHeight / 2 - 100), 0);
+            PShape shape = createShape(RECT, location.x, location.y, 100, 100);
+            PImage image = loadImage(e.getImageFilePath());
 
-            //String imageFilePath = String.format("./" + experiment.getTitle().replace(" ", "") + experiment.getImageFilePath() + "/thumbnail");
-
-            PImage image = loadImage(experiment.getImageFilePath());
-
-            if(image == null){
-                image = loadImage("default-thumbnail.png");
+            if (image == null) {
+                loadImage("default-thumbnail.png");
             }
 
             shape.setTexture(image);
+            this.menuItems.add(shape);
 
-            menuItems.add(shape);
+            offset++;
         }
     }
-
-    private void loadExperiments(){
-        this.experiments = new ArrayList<>();
-        this.experiments.add(new SampleExperiment());
-        this.experiments.add(new GravityExperiment());
-    }
 }
-

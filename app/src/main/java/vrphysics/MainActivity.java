@@ -6,12 +6,13 @@ import java.util.HashMap;
 
 import processing.vr.VRActivity;
 import processing.core.PApplet;
+import vrphysics.experiment.BaseExperiment;
 import vrphysics.sketches.Menu;
 import vrphysics.sketches.GravityExperiment;
 import vrphysics.sketches.SampleExperiment;
 
 public class MainActivity extends VRActivity {
-    private HashMap<String, PApplet> experiments;
+    private HashMap<String, BaseExperiment> experiments;
     private PApplet menu;
     private PApplet currentSketch;
 
@@ -20,28 +21,21 @@ public class MainActivity extends VRActivity {
         this.experiments.put("GravityExperiment", new GravityExperiment());
     }
 
-    private void testLoad() {
-        this.loadExperiment("GravityExperiment");
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PApplet menu = new Menu();
-        setSketch(menu);
 
         this.experiments = new HashMap<>();
         this.populateExperimentList();
-        this.menu = new Menu();
+        this.menu = new Menu(this.experiments.values());
         this.currentSketch = this.menu;
 
         this.setSketch(this.currentSketch);
-        //this.testLoad();
     }
 
-    public void loadExperiment(String experiment) {
-        if (this.experiments.containsKey(experiment)) {
-            this.currentSketch = this.experiments.get(experiment);
+    public void loadExperiment(BaseExperiment experiment) {
+        if (this.experiments.containsValue(experiment)) {
+            this.currentSketch = experiment;
             this.setSketch(this.currentSketch);
         } else {
             this.returnToMenu();
