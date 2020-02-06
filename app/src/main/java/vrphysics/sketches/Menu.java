@@ -1,22 +1,25 @@
 package vrphysics.sketches;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
+import processing.core.PVector;
 import vrphysics.experiment.BaseExperiment;
 import vrphysics.experiment.ExperimentMetaData;
 
 public class Menu extends PApplet {
     private PImage bg;
     private List<BaseExperiment> experiments;
-    private List<PShape> menuItems;
+    private HashMap<BaseExperiment, PShape> menuItems;
 
     public Menu(List<BaseExperiment> experiments) {
         this.experiments = experiments;
-        this.menuItems = new ArrayList<PShape>();
+        this.menuItems = new HashMap<BaseExperiment, PShape>();
     }
 
     public void settings() {
@@ -35,23 +38,33 @@ public class Menu extends PApplet {
 
     public void draw() {
         this.background(255);
-        this.pushMatrix();
-        this.scale(1, -1);
+        int offset = 0;
 
-        for (PShape p : this.menuItems) {
-            shape(p);
+        for (Map.Entry<BaseExperiment, PShape> e : this.menuItems.entrySet()) {
+            this.pushMatrix();
+            this.scale(1, -1);
+            this.shape(e.getValue());
+            this.popMatrix();
+
+            this.textSize(32);
+            this.fill(50, 50, 50);
+            this.text(e.getKey().getTitle(), 300 * offset, -140);
+
+            offset++;
         }
-
-        this.popMatrix();
     }
 
-    private void createMenuItems(){
+    private void highlightOnHover() {
+
+    }
+
+    private void createMenuItems() {
         int offset = 0;
 
         // TODO: include z-axis and adjust shape locations
         for (ExperimentMetaData e : this.experiments) {
-            PShape shape = createShape(RECT, 150 * offset, 0, 100, 100);
-            this.menuItems.add(shape);
+            PShape menuShape = createShape(RECT, 300 * offset, 0, 100, 100);
+            this.menuItems.put((BaseExperiment) e, menuShape);
 
             PImage image = loadImage(e.getImageFilePath());
 
@@ -59,7 +72,7 @@ public class Menu extends PApplet {
                 this.loadImage("default-thumbnail.png");
             }
 
-            shape.setTexture(image);
+            menuShape.setTexture(image);
 
             offset++;
         }
