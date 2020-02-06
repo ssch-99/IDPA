@@ -25,7 +25,7 @@ public class SampleExperiment extends BaseExperiment {
 
     public void setup() {
         this.vrActivity = ((MainActivity)this.getActivity());
-        cameraUp();
+        this.cameraUp();
     }
 
     public void calculate() {
@@ -33,7 +33,7 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     public void draw() {
-        background(140);
-        sphere(300);
+        this.background(140);
+        this.sphere(300);
     }
 }

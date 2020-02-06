@@ -6,13 +6,9 @@ import processing.core.PVector;
 import vrphysics.experiment.BaseExperiment;
 
 public class GravityExperiment extends BaseExperiment {
-    PShape earthSphere; //9.81
-    PVector earthLocation;
-    PShape moonSphere; //1.62
-    PVector moonLocation;
-    PShape marsSphere; //3.711
-    PVector marsLocation;
-    PImage sky;
+    private PShape earthSphere, moonSphere, marsSphere; //9.81, 1.62, 3.711
+    private PVector earthLocation, moonLocation, marsLocation;
+    private PImage sky;
     Boolean start = false;
 
     @Override
@@ -36,51 +32,51 @@ public class GravityExperiment extends BaseExperiment {
     }
 
     public void setup() {
-        cameraUp();
-        noStroke();
-        sphereDetail(40);
-        earthLocation = new PVector(0,0);
-        moonLocation = new PVector(-500,0);
-        marsLocation = new PVector(500,0);
+        this.cameraUp();
+        this.noStroke();
+        this.sphereDetail(40);
+        this.earthLocation = new PVector(0,0);
+        this.moonLocation = new PVector(-500,0);
+        this.marsLocation = new PVector(500,0);
 
-        earthSphere = createShape(SPHERE,100);
-        earthSphere.setTexture(loadImage("./gravityExperiment/earth.jpg"));
+        this.earthSphere = createShape(SPHERE,100);
+        this.earthSphere.setTexture(loadImage("./gravityExperiment/earth.jpg"));
 
-        moonSphere = createShape(SPHERE, 100);
-        moonSphere.setTexture(loadImage("./gravityExperiment/moon.jpg"));
+        this.moonSphere = createShape(SPHERE, 100);
+        this.moonSphere.setTexture(loadImage("./gravityExperiment/moon.jpg"));
 
-        marsSphere = createShape(SPHERE, 100);
-        marsSphere.setTexture(loadImage("./gravityExperiment/mars.jpeg"));
+        this.marsSphere = createShape(SPHERE, 100);
+        this.marsSphere.setTexture(loadImage("./gravityExperiment/mars.jpeg"));
 
-        sky = loadImage("gravityExperiment/sky.jpeg");
+        this.sky = loadImage("gravityExperiment/sky.jpeg");
     }
 
     public void draw() {
-        if(start){
+        if(this.start){
             //if(locationEarth.y > 0){
-            earthLocation.y -= 9.81f;
+            this.earthLocation.y -= 9.81f;
             //}
             //if(locationMoon.y > 0){
-            moonLocation.y -= 1.62f;
+            this.moonLocation.y -= 1.62f;
             // }
             //if(locationMars.x > 0){
-            marsLocation.y -= 3.711f;
+            this.marsLocation.y -= 3.711f;
             //}
         }
 
         //background(sky);
-        background(0);
+        this.background(0);
         //translate(300,0, -300);
-        shape(earthSphere, earthLocation.x, earthLocation.y);
+        this.shape(earthSphere, earthLocation.x, earthLocation.y);
 
         //translate(300,0, 0);
         //translate(0,0,500);
-        shape(moonSphere, moonLocation.x, moonLocation.y);
+        this.shape(moonSphere, moonLocation.x, moonLocation.y);
 
         //translate(-600,0,0);
         //translate(0,0,500);
-        shape(marsSphere, marsLocation.x, marsLocation.y);
-        translate(marsLocation.x, marsLocation.y,10000);
+        this.shape(marsSphere, marsLocation.x, marsLocation.y);
+        this.translate(marsLocation.x, marsLocation.y,10000);
     }
 
     public void mousePressed(){
@@ -88,5 +84,7 @@ public class GravityExperiment extends BaseExperiment {
     }
 
 
-    public void settings() {  fullScreen(VR); }
+    public void settings() {
+        this.fullScreen(VR);
+    }
 }
