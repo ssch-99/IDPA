@@ -13,10 +13,10 @@ import vrphysics.experiment.ExperimentMetaData;
 
 public class Menu extends PApplet {
     private PImage bg;
-    private Collection<BaseExperiment> experiments;
+    private List<BaseExperiment> experiments;
     private List<PShape> menuItems;
 
-    public Menu(Collection<BaseExperiment> experiments) {
+    public Menu(List<BaseExperiment> experiments) {
         this.experiments = experiments;
         this.menuItems = new ArrayList<PShape>();
     }
@@ -27,7 +27,7 @@ public class Menu extends PApplet {
 
     public void setup() {
         //cameraUp();
-        createMenuItems();
+        this.createMenuItems();
         // bg = loadImage("bg.jpg");
         // bg.resize(displayWidth, displayHeight);
     }
