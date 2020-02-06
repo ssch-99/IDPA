@@ -1,13 +1,11 @@
 package vrphysics.sketches;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PShape;
-import processing.core.PVector;
 import vrphysics.experiment.BaseExperiment;
 import vrphysics.experiment.ExperimentMetaData;
 
@@ -22,14 +20,13 @@ public class Menu extends PApplet {
     }
 
     public void settings() {
-        fullScreen(VR);
+        fullScreen(MONO);
     }
 
     public void setup() {
-        //cameraUp();
+        this.cameraUp();
+        this.noStroke();
         this.createMenuItems();
-        // bg = loadImage("bg.jpg");
-        // bg.resize(displayWidth, displayHeight);
     }
 
     public void calculate() {
@@ -37,17 +34,15 @@ public class Menu extends PApplet {
     }
 
     public void draw() {
-        background(255);
+        this.background(255);
+        this.pushMatrix();
+        this.scale(1, -1);
 
-        shape(menuItems.get(0));
-        shape(menuItems.get(1));
+        for (PShape p : this.menuItems) {
+            shape(p);
+        }
 
-        // TODO: Fix iteration over menu items (static atm)
-        /*ListIterator iterator = menuItems.listIterator();
-
-        while(iterator.hasNext()){
-            shape(menuItems.get(iterator.nextIndex()));
-        }*/
+        this.popMatrix();
     }
 
     private void createMenuItems(){
@@ -55,16 +50,16 @@ public class Menu extends PApplet {
 
         // TODO: include z-axis and adjust shape locations
         for (ExperimentMetaData e : this.experiments) {
-            PVector location = new PVector((displayWidth / 2 - 100) * offset, (displayHeight / 2 - 100), 0);
-            PShape shape = createShape(RECT, location.x, location.y, 100, 100);
+            PShape shape = createShape(RECT, 150 * offset, 0, 100, 100);
+            this.menuItems.add(shape);
+
             PImage image = loadImage(e.getImageFilePath());
 
             if (image == null) {
-                loadImage("default-thumbnail.png");
+                this.loadImage("default-thumbnail.png");
             }
 
             shape.setTexture(image);
-            this.menuItems.add(shape);
 
             offset++;
         }
