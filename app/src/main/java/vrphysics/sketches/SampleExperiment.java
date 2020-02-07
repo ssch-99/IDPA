@@ -24,7 +24,6 @@ public class SampleExperiment extends BaseExperiment {
     }
 
     public void setup() {
-        this.vrActivity = ((MainActivity)this.getActivity());
         this.cameraUp();
     }
 
