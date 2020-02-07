@@ -2,8 +2,11 @@ package vrphysics.sketches;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -16,6 +19,9 @@ public class Menu extends PApplet {
     private PImage bg;
     private List<BaseExperiment> experiments;
     private HashMap<BaseExperiment, PShape> menuItems;
+    private PVector origin;
+    private PVector direction;
+    private PVector focusedVector;
 
     public Menu(List<BaseExperiment> experiments) {
         this.experiments = experiments;
@@ -30,6 +36,8 @@ public class Menu extends PApplet {
         this.cameraUp();
         this.noStroke();
         this.createMenuItems();
+        origin = new PVector(0,0);
+        direction = new PVector(0,0);
     }
 
     public void calculate() {
@@ -52,10 +60,34 @@ public class Menu extends PApplet {
 
             offset++;
         }
+
+        this.focusedVector = intersectsPlane(origin, direction);
+        if(this.focusedVector != null){
+            highlightOnHover();
+        }
     }
 
     private void highlightOnHover() {
+        /*Stream<HashMap<BaseExperiment, PShape>> item = this.menuItems.entrySet().stream().filter(e ->
+             e.getValue().getParam(0) ==
+        )*/
+        for (Map.Entry<BaseExperiment, PShape> e : this.menuItems.entrySet()) {
+            //float experimentX = e.getValue().getParams()[0];
+            //float experimentY = e.getValue().getParams()[1];
 
+            if(IsRayOnMenuItem(e.getValue())){
+                e.getValue().setTexture(loadImage("default-thumbnail.png"));
+            }
+        }
+    }
+
+    private boolean IsRayOnMenuItem(PShape sh){
+        float leftX = sh.getVertex(3).x;
+        float rightX = sh.getVertex(2).x;
+        float topY = sh.getVertex(2).y;
+        float bottomY = sh.getVertex(0).y;
+
+        return this.focusedVector.x >= leftX && this.focusedVector.x <= rightX && this.focusedVector.y >= bottomY && this.focusedVector.y <= topY;
     }
 
     private void createMenuItems() {
