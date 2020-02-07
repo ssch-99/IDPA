@@ -1,11 +1,11 @@
-package vrphysics.sketches;
+package vrphysics.sketches.gravityExperiment;
 
 import processing.core.PImage;
 import processing.core.PShape;
 import processing.core.PVector;
 import vrphysics.experiment.BaseExperiment;
 
-public class GravityExperiment extends BaseExperiment {
+public class PlanetSelection extends BaseExperiment {
     private PShape earthSphere, moonSphere, marsSphere; //9.81, 1.62, 3.711
     private PVector earthLocation, moonLocation, marsLocation;
     private PImage sky;
@@ -40,34 +40,28 @@ public class GravityExperiment extends BaseExperiment {
         this.marsLocation = new PVector(500,0);
 
         this.earthSphere = createShape(SPHERE,100);
-        this.earthSphere.setTexture(loadImage("./gravityExperiment/earth.jpg"));
+        //this.earthSphere.setTexture(loadImage("gravityExperiment/earth.jpg"));
 
         this.moonSphere = createShape(SPHERE, 100);
-        this.moonSphere.setTexture(loadImage("./gravityExperiment/moon.jpg"));
+       // this.moonSphere.setTexture(loadImage("gravityExperiment/moon.jpg"));
 
         this.marsSphere = createShape(SPHERE, 100);
-        this.marsSphere.setTexture(loadImage("./gravityExperiment/mars.jpeg"));
+      //  this.marsSphere.setTexture(loadImage("gravityExperiment/mars.jpeg"));
 
         this.sky = loadImage("gravityExperiment/sky.jpeg");
     }
 
     public void draw() {
-        if(this.start){
-            //if(locationEarth.y > 0){
-            this.earthLocation.y -= 9.81f;
-            //}
-            //if(locationMoon.y > 0){
-            this.moonLocation.y -= 1.62f;
-            // }
-            //if(locationMars.x > 0){
-            this.marsLocation.y -= 3.711f;
-            //}
-        }
-
         //background(sky);
         this.background(0);
         //translate(300,0, -300);
         this.shape(earthSphere, earthLocation.x, earthLocation.y);
+
+        if (this.intersectsSphere(100, 0, 0)) {
+                this.earthSphere.setTexture(loadImage("gravityExperiment/mars.jpeg"));
+        } else{
+            this.earthSphere.setTexture(loadImage("gravityExperiment/earth.jpg"));
+        }
 
         //translate(300,0, 0);
         //translate(0,0,500);
@@ -85,6 +79,6 @@ public class GravityExperiment extends BaseExperiment {
 
 
     public void settings() {
-        this.fullScreen(VR);
+        this.fullScreen(MONO);
     }
 }
