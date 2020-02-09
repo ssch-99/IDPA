@@ -9,9 +9,8 @@ import processing.vr.VRActivity;
 import processing.core.PApplet;
 import vrphysics.experiment.BaseExperiment;
 import vrphysics.sketches.Menu;
-import vrphysics.sketches.gravityExperiment.GravityExperiment;
 import vrphysics.sketches.SampleExperiment;
-import vrphysics.sketches.gravityExperiment.PlanetSelection;
+import vrphysics.sketches.gravityExperiment.GravityExperiment;
 
 public class MainActivity extends VRActivity {
     private List<BaseExperiment> experiments;
@@ -36,7 +35,7 @@ public class MainActivity extends VRActivity {
 
         //Experiment laden
         System.out.println(this.experiments);
-        this.setSketch(new PlanetSelection());
+        this.setSketch(new GravityExperiment());
     }
 
     public void loadExperiment(BaseExperiment experiment) {
