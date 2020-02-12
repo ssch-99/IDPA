@@ -35,6 +35,7 @@ public class MainActivity extends VRActivity {
 
         //Experiment laden
         System.out.println(this.experiments);
+
         this.setSketch(new GravityExperiment());
     }
 

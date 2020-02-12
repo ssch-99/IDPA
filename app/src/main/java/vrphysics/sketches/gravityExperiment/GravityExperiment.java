@@ -14,16 +14,14 @@ public class GravityExperiment extends BaseExperiment {
     private List<Planet> planets = new ArrayList<>();
 
 
-    private PShape earth, moon, mars,sphere; //9.81, 1.62, 3.711
-    private PVector earthLocation, moonLocation, marsLocation,spehreLocation;
+    private PShape sphere;
+    private PVector spehreLocation;
     private Boolean start = false;
-    private MainActivity mainActivity;
     private Planet selectedPlanet = null;
-
+    private Float startSphereHeight = 1000.00f;
     private Boolean showPlanets = true;
 
-    Float velocity = 0.00f;
-    Float time = 0f;
+    private Float time = 0f;
 
     @Override
     public String getTitle() {
@@ -99,8 +97,7 @@ public class GravityExperiment extends BaseExperiment {
 
         this.sphere = createShape(SPHERE, 80);
 
-        spehreLocation = new PVector(0,500,1000);
-        mainActivity = (MainActivity) this.getActivity();
+        spehreLocation = new PVector(0,500,startSphereHeight);
     }
 
     public void draw() {
@@ -123,7 +120,6 @@ public class GravityExperiment extends BaseExperiment {
                         showPlanets = false;
                         selectedPlanet = planet;
                         spehreLocation = new PVector(0,500,1000);
-                        velocity = 0f;
                         time = 0f;
                     }
 
@@ -149,14 +145,15 @@ public class GravityExperiment extends BaseExperiment {
                     400, 100, 400, 500);
             this.rotateY(10);
             Float accelleration = selectedPlanet.getGravity() / 60; // Methode wird 60 mal pro Sekunde ausgeführt -> pixel pro sekunde * sekunde
-            velocity = (accelleration * time);
-            System.out.println(velocity);
+            double distance = 0.5 * accelleration * time * time;
+            System.err.println(distance + " - " + time);
+
             int count = 1;
             if(start){
                 if(this.spehreLocation.y > -700) {
 
 
-                    this.spehreLocation.y -= velocity;
+                    this.spehreLocation.y = (float) (startSphereHeight -distance);
 
                         //this.delay(1);
                         time += (1);
